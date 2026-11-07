@@ -24,7 +24,7 @@ pub fn validate(from: &str, to: &str, amount: u64) -> Result<(), TransferError> 
     if from == to {
         return Err(TransferError::SameAccount);
     }
-    ok(())    
+    Ok(())    
 }
 
 /// Validate a transfer and return the sender's remaining balance.
@@ -46,7 +46,7 @@ pub fn transfer(
             required: amount,
         });
     }
-    ok(balance - amount)
+    Ok(balance - amount)
 }
 
 /// Pay through `transfer` and propagate any error with `?`.
@@ -55,5 +55,5 @@ pub fn transfer(
 pub fn pay(balance: u64, from: &str, to: &str, amount: u64) -> Result<u64, TransferError> {
     //todo!()
     let remaining_balance = transfer(balance, from, to, amount)?;
-    ok(remaining_balance)
+    Ok(remaining_balance)
 }
